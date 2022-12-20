@@ -6,26 +6,20 @@ form.addEventListener('submit',store_to_local)
 function store_to_local(e)
 {
     e.preventDefault();
-   var username=document.getElementById('name').value;
-   var mobile=document.getElementById('email').value;
-
+   
     const my_Obj={
-        name_h: username,
-        contact : mobile
+        name_h: document.getElementById('name').value,
+        contact : document.getElementById('email').value
     };
     var my_obj_stringed=JSON.stringify(my_Obj);
     
-
-   localStorage.setItem('user detail'+username,my_obj_stringed);
+   localStorage.setItem('user detail'+JSON.stringify(my_Obj.name_h),my_obj_stringed);
+   
    let li=document.createElement('li');
    li.appendChild(document.createTextNode(document.getElementById('name').value))
-   li.appendChild(document.createTextNode(document.getElementById('email').value))
+   li.appendChild(document.createTextNode(document.getElementById('emaiil').value))
 
-   itemslist.appendChild(li); 
-
-  
-   
-   
+   itemslist.appendChild(li);
 
 
 }

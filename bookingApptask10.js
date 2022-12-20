@@ -7,7 +7,11 @@ function store_to_local(e)
     e.preventDefault();
     var name_h=document.getElementById('name').value;
    var email=document.getElementById('email').value;
-
-   localStorage.setItem(name_h,email);
+    const my_Obj={
+        user: name_h;
+        contact: email;
+    }
+    var my_obj_stringed=JSON.stringify(my_Obj)
+   localStorage.setItem("user1",my_obj_stringed);
 }
 
