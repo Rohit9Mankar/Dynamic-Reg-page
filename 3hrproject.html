@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+  <title>Expense tracker</title>
+
+  <style>
+      body{
+        padding:5px;
+      }
+  </style>
+
+</head>
+
+<body>
+<div>
+    <label for="quantity">Choose expense</label>
+    <input type="number" id="quantity" name="quantity" >
+
+    <label for="description">Choose description</label>
+    <input type="text" id="description" name="description">
+    
+    
+        <label for="category">Choose a car:</label>
+
+<select name="category" id="category">
+  <option value="medical">Medical</option>
+  <option value="travel">Travel</option>
+  <option value="leisure">Leisure</option>
+  <option value="Rent">Rent</option>
+</select>
+    
+<button id="btn" onclick="storeToLocal(event)">Submit</button>
+</div>
+  
+    <ul id="list">
+
+    </ul>
+
+<script>
+  function storeToLocal(e)
+{
+    e.preventDefault();
+    const qnty=document.getElementById("quantity").value;
+    const descrip=document.getElementById("description").value;
+    const cat=document.getElementById("category").value;
+   
+    const obj1={
+            qnty,
+            descrip,
+            cat
+    }
+
+    const obj1_string=JSON.stringify(obj1);
+      localStorage.setItem(obj1.descrip,obj1_string);
+
+      printDetails(obj1);
+  
+}
+
+function printDetails(detail)
+{
+    document.getElementById("quantity").value='';
+    document.getElementById("description").value='';
+    document.getElementById("category").value='';
+   
+    const parentNode = document.getElementById('list');
+    const childHTML = `<li id=${detail.descrip}> ${detail.qnty} - ${detail.descrip} - ${detail.cat}
+                            <button onclick=deleteUser('${detail.descrip}')> Delete Expense</button>
+                            <button onclick=editUserDetails('${detail.qnty}','${detail.descrip}','${detail.cat}')>Edit Expense</button>
+                         </li>`
+
+    parentNode.innerHTML = parentNode.innerHTML + childHTML;
+}
+
+function editUserDetails(quant,descrp,cate)
+{
+    document.getElementById("quantity").value='';
+    document.getElementById("description").value='';
+    document.getElementById("category").value='';
+   deleteUser(descrp)
+}
+
+function deleteUser(descripKey)
+{
+    localStorage.removeItem(descripKey);
+    removeFromScreen(descripKey)
+}
+
+function removeFromScreen(descrip)
+{
+    const parentNode = document.getElementById('list');
+                const childNodeToBeDeleted = document.getElementById(descrip);
+                if(childNodeToBeDeleted) {
+                    parentNode.removeChild(childNodeToBeDeleted)
+                }
+}
+</script>
+
+
+</body>
+</html>
