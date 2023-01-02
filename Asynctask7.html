@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+
+
+    <head>
+        <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+        <title>Webpage</title>
+
+        <!-- CSS only -->
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+
+<!-- JavaScript Bundle with Popper -->
+
+<script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+    <script>
+        console.log('Person 1 : shows ticket')
+console.log('Person 2 : shows ticket')
+
+const wifeBringingTikets=new Promise((resolve,ticket)=>{
+    setTimeout(()=>{
+       resolve('ticket');
+    },3000)
+})
+
+const getPopCorn=wifeBringingTikets.then((t)=>{
+    console.log('wife : I have some tics')
+    console.log('husband : we should go in')
+    console.log('wife : no I am hungry')
+    return new Promise((resolve,reject)=> resolve(`${t} popcorn`))
+})
+
+const getButter=getPopCorn.then((t)=>{
+    console.log('husband : I got popcorn')
+    console.log('husband : we should go in')
+    console.log('wife : no I need butter on my popcorn')
+    return new Promise((resolve,reject)=> resolve(`${t} butter`))
+})
+
+const getoldDrinks=getButter.then((t)=>{
+    console.log('wife : I need cold drink')
+    console.log('husband : Go and get it, I will wait')
+    console.log('wife : I got the cold drinks')
+    return new Promise((resolve,reject)=> resolve(`${t} coldDrinks`))
+})
+
+getoldDrinks.then((t)=>console.log(t))
+console.log('Person 4 : shows ticket')
+console.log('Person 5 : shows ticket')
+   </script>
+</body>
+</html>
