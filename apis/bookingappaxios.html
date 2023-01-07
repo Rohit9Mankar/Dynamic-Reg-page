@@ -82,7 +82,7 @@
 
         <section class="container">
 
-            <form >
+            <form id="my_form">
 
 
 
@@ -139,7 +139,7 @@
                 email,
                 phone
             }
-           axios.post('https://crudcrud.com/api/383138d5b7864a0fb14ee1b773458e1f/appointmentData',my_obj)
+           axios.post('https://crudcrud.com/api/5a6562110a6b46b28e4c1d97b2e26152/appointmentData',my_obj)
            .then((res) => {
             showOnScreen(res.data)
             console.log(res)
@@ -149,12 +149,7 @@
             //showOnScreen(my_obj)
          }
 
-        // window.addEventListener("DOMContentLoaded",()=> {
-        //        axios.get('https://crudcrud.com/api/383138d5b7864a0fb14ee1b773458e1f/appointmentData')
-        //         .then(res =>{
-        //            res.data.forEach((item)=>showOnScreen(item))
-        //         })
-        //    })
+        
 
          function showOnScreen(user){
                 document.getElementById('email').value = '';
@@ -174,7 +169,16 @@
                 parentNode.innerHTML = parentNode.innerHTML + childHTML;
             }
            
-          
+         window.addEventListener("DOMContentLoaded",()=> {
+               axios.get('https://crudcrud.com/api/5a6562110a6b46b28e4c1d97b2e26152/appointmentData')
+                .then((res) =>{
+                   for(var i=0;i<res.data.length;i++)
+                   {
+                    showOnScreen(res.data[i])
+                   }
+                })
+                .catch((err) => console.log(err))
+           })
            
             function editUserDetails(email, name){
 
